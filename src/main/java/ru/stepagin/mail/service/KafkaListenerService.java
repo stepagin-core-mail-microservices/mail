@@ -21,13 +21,13 @@ public class KafkaListenerService {
             groupId = "spring.kafka.consumer.group-id", containerFactory = "userListenerContainerFactory")
     public void usersListener(@Payload UserEntity userEntity) {
         System.out.println("received message: " + userEntity);
-        userService.save(userEntity);
+        userService.handleUserMessage(userEntity);
     }
 
     @KafkaListener(topics = "${app.kafka.topics.image.name}",
             groupId = "spring.kafka.consumer.group-id", containerFactory = "imageListenerContainerFactory")
     public void imagesListener(@Payload ImageEntity imageEntity) {
         System.out.println("received message: " + imageEntity);
-        imageService.save(imageEntity);
+        imageService.handleImageMessage(imageEntity);
     }
 }

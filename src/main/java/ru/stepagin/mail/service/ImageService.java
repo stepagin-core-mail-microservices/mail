@@ -10,9 +10,21 @@ import ru.stepagin.mail.repository.ImageRepository;
 @RequiredArgsConstructor
 public class ImageService {
     private final ImageRepository imageRepository;
+    private final NotificationService notificationService;
 
     @Transactional
     public void save(ImageEntity image) {
         imageRepository.save(image);
+    }
+
+    @Transactional
+    public void handleImageMessage(ImageEntity imageEntity) {
+        if (imageEntity == null) {
+            return;
+        }
+        if (imageEntity.getOwner() == null)
+            return;
+        notificationService.sendImageCreatedMessage(imageEntity, imageEntity.getOwner());
+        save(imageEntity);
     }
 }
