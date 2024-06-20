@@ -18,7 +18,6 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ImageEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", columnDefinition = "UUID", nullable = false)
     private UUID id;
 

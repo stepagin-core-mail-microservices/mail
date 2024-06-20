@@ -37,7 +37,24 @@ public class NotificationService {
                 "<br><br>" +
                 "--<br>С уважением,<br>Разработчик Степан Понамарев<br>" +
                 "GitHub: https://github.com/stepagin<br>" +
-                "Проект: https://github.com/orgs/stepagin-core-mail-microservices/repositories<br>" +
+                "Проект: https://github.com/orgs/stepagin-core-mail-microservices<br>" +
+                "</p>\n";
+
+        emailService.sendEmail(owner.getEmail(), subject, content);
+    }
+
+    public void sendImageDownloadedMessage(ImageEntity imageEntity, UserEntity owner) {
+        String subject = "Скачано изображение: \"" + imageEntity.getName() + "\"";
+        String content = "<p>" + "Скачано изображение \"" + imageEntity.getName() + "\"<br>" +
+                "По ссылке: <br>" +
+                coreUrl +
+                "/images/" +
+                imageEntity.getId() +
+                "<br>" +
+                "Его размер: " + imageEntity.getSize() + " байт<br><br>" +
+                "--<br>С уважением,<br>Разработчик Степан Понамарев<br>" +
+                "GitHub: https://github.com/stepagin<br>" +
+                "Проект: https://github.com/orgs/stepagin-core-mail-microservices<br>" +
                 "</p>\n";
 
         emailService.sendEmail(owner.getEmail(), subject, content);

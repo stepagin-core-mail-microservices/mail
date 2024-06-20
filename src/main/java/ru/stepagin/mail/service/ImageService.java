@@ -24,7 +24,11 @@ public class ImageService {
         }
         if (imageEntity.getOwner() == null)
             return;
-        notificationService.sendImageCreatedMessage(imageEntity, imageEntity.getOwner());
-        save(imageEntity);
+        if (!imageRepository.existsById(imageEntity.getId())) {
+            notificationService.sendImageCreatedMessage(imageEntity, imageEntity.getOwner());
+            save(imageEntity);
+        } else {
+            notificationService.sendImageDownloadedMessage(imageEntity, imageEntity.getOwner());
+        }
     }
 }
